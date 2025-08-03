@@ -4,11 +4,7 @@ module.exports = {
     "./src/**/*.{html,ts}",
     "./src/**/*.{js,jsx,ts,tsx}",
     "./pages/**/*.{html,ts}",
-    "./components/**/*.{html,ts}",
-    "./app/**/*.{html,ts}",
-    "./public/**/*.{html,ts}",
-    "./src/pages/**/*.{html,ts}",
-    "./src/components/**/*.{html,ts}"
+    "./components/**/*.{html,ts}"
   ],
   safelist: [
     'text-white',

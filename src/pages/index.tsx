@@ -3,6 +3,7 @@ import { IconGift } from "../components/icons/IconGift";
 import { IconOn } from "../components/icons/IconOn";
 import { IconStar } from "../components/icons/IconStar";
 import { IconNotebook } from "../components/icons/IconNotebook";
+import { useRouter } from "next/router";
 
 const vantagens = [
   {
@@ -26,6 +27,7 @@ const vantagens = [
     icon: IconNotebook,
   },
 ];
+
 
 export default function Home() {
   return (
