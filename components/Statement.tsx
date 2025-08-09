@@ -132,7 +132,7 @@ export function Statement({
                               : "text-red-600"
                           }
                         >
-                          {isDeposit(transaction) ? "⬆️" : "⬇️"}
+                          {isDeposit(transaction) ? "+" : "-"}
                         </span>
                       </td>
                       <td className="py-2 sm:py-4 pr-1 sm:pr-2">

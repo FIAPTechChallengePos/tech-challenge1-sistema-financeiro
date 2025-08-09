@@ -6,6 +6,8 @@ import { IconStar } from "../components/icons/IconStar";
 import { IconNotebook } from "../components/icons/IconNotebook";
 import { IconGift } from "../components/icons/IconGift";
 import { IconOn } from "../components/icons/IconOn";
+import { Button } from "../components/Button";
+import { useRouter } from "next/router";
 
 Layout
 
@@ -34,12 +36,13 @@ const vantagens = [
 
 
 export default function Home() {
+  const router = useRouter();
   return (
     <section id="sobre" className="bg-primary-gradient dark:bg-primary-gradient-dark">
       <div className="container flex flex-col gap-12 py-12">
         {/* Primeira dobra */}
         <div className="flex flex-col-reverse md:flex-col xl:flex-row justify-center items-center gap-12 xl:gap-16">
-          <div className="w-full max-w-full md:max-w-[470px] flex justify-center text-center">
+          <div className="w-full max-w-full md:max-w-[790px] flex justify-center text-center">
             <Text variant="title-bold" as="h1" color="text-white dark:text-gray-200">
               Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!
             </Text>
@@ -48,11 +51,11 @@ export default function Home() {
         </div>
 
         {/* Segunda dobra */}
-        <div id="servico" className="flex flex-col gap-9 text-center">
+        <div id="servico" className="flex flex-col gap-2 text-left">
           <Text variant="title-bold" as="h1" color="text-white dark:text-gray-200">
             Vantagens do nosso banco:
           </Text>
-          <div className="flex flex-wrap lg:flex-row justify-center lg:justify-between gap-12 xl:py-[75px]">
+          <div className="flex flex-wrap lg:flex-row justify-center lg:justify-between gap-12 xl:py-[72px]">
             {vantagens.map((vantagem, idx) => {
               const Icon = vantagem.icon;
               return (
@@ -70,11 +73,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-    <div className="p-8">
-      <ul className="space-y-2 text-center title-bold text-white">
-        <li><Link href={routes.transacoes}>📄 Ver Transações</Link></li>
-        <li><Link href={routes.cadastro}>➕ Nova Transação</Link></li>
-      </ul>
+    <div className=" space-y-2 grid h-56 grid-cols content-center justify-center gap-4...">
+        <Button label="➕ Nova Transação" onClick={() => router.push("/panel")}/>
+        <Button label="📄 Ver Transações " onClick={() => router.push("/transactions")} />
     </div>
     </section>
 

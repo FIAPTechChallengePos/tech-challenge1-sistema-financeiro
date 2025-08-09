@@ -1,16 +1,19 @@
 import React, { useState } from "react";
+import { TransactionType, CreateTransactionData } from "../src/types/transaction";
 // import { Button } from "./Button";
 // import { Text } from "./Text";
 // import { Input } from "./Input";
 
-type TransactionType = "credit" | "debit" | "loan";
+interface NewTransactionProps {
+  onAddTransaction?: (data: CreateTransactionData) => Promise<void>;
+}
 const transactionOptions = [
-  { display: "Receita (Câmbio de Moeda)", value: "credit" },
-  { display: "Despesa (DOC/TED)", value: "debit" },
-  { display: "Empréstimo (Empréstimo e Financiamento)", value: "loan" },
+  { display: "Receita", value: "credit" },
+  { display: "Despesa", value: "debit" },
+  { display: "Empréstimo", value: "loan" },
 ];
 
-export function NewTransaction() {
+export function NewTransaction({ onAddTransaction }: NewTransactionProps) {
   const [type, setType] = useState<TransactionType>("credit");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -39,7 +42,7 @@ export function NewTransaction() {
     setDescription(e.target.value);
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!type) {
       setSubmitStatus({ success: false, message: "Por favor, selecione o tipo de transação." });
@@ -53,11 +56,27 @@ export function NewTransaction() {
       setSubmitStatus({ success: false, message: "Por favor, adicione uma descrição para a transação." });
       return;
     }
-    setSubmitStatus({ success: true, message: "Transação criada com sucesso!" });
-    setType("credit");
-    setAmount("");
-    setDescription("");
-    setTimeout(() => setSubmitStatus({ success: false, message: "" }), 3000);
+
+    try {
+      const transactionData: CreateTransactionData = {
+        type,
+        amount: parseFloat(amount.replace(/\./g, "").replace(",", ".")),
+        description: description.trim(),
+      };
+
+      if (onAddTransaction) {
+        await onAddTransaction(transactionData);
+      }
+
+      setSubmitStatus({ success: true, message: "Transação criada com sucesso!" });
+      setType("credit");
+      setAmount("");
+      setDescription("");
+      setTimeout(() => setSubmitStatus({ success: false, message: "" }), 3000);
+    } catch (error) {
+      setSubmitStatus({ success: false, message: "Erro ao criar transação. Tente novamente." });
+      console.error('Erro ao criar transação:', error);
+    }
   }
 
   return (
@@ -130,14 +149,6 @@ export function NewTransaction() {
               Concluir Transação
             </button>
           </div>
-        </div>
-        {/* Imagem ilustrativa */}
-        <div className="w-full md:w-1/2 pl-4 mt-[20px] flex justify-center">
-          <img
-            src="/icons/vector.svg"
-            alt="Ilustração de Transação"
-            className="max-w-full h-auto"
-          />
         </div>
       </form>
     </div>

@@ -2,11 +2,16 @@ import { Layout } from "../components/Layout";
 import { Dashboard } from "../components/Dashboard";
 import { Statement } from "../components/Statement";
 import { NewTransaction } from "../components/NewTransaction";
+import routes from "../lib/routes";
+import Link from "next/link";
 
 export default function PanelPage() {
   return (
     <Layout>
       <section className="h-full w-full bg-gray-100 flex flex-col mt-0 sm:mt-[52px] xl:mt-0 overflow-x-hidden">
+         <div className="pt-6 pl-8 pb-2 font-bold text-(black-700)">
+           <Link href={routes.home}>HOME</Link>
+        </div>
         <div className="bg-gray-200 dark:bg-blue-violet-50 flex flex-grow">
           <div className="flex w-full flex-col gap-6 p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6">
             <div className="flex flex-col 2md:flex-row gap-6">
