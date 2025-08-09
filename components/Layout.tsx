@@ -1,5 +1,4 @@
 import React from "react";
-import './styles/globals.css';
 // import { Aside } from "./Aside"; // Crie depois se necessário
 
 export function Layout({ children }: { children: React.ReactNode }) {

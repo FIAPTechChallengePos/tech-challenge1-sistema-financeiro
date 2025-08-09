@@ -20,8 +20,7 @@ export default function PanelPage() {
                     showAllTransactions={false}
                     customTitle="Transações"
                     showLastTransactionsSubtitle={true}
-                    swapColumns={false}
-                  />
+                    swapColumns={false} transactions={[]}                  />
                 </div>
               </div>
             </div>

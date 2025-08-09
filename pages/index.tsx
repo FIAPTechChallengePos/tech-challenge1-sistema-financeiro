@@ -1,9 +1,13 @@
+import Link from "next/link";
+import { Layout } from "../components/Layout";
+import routes from "../lib/routes";
 import { Text } from "../components/Text";
-import { IconGift } from "../components/icons/IconGift";
-import { IconOn } from "../components/icons/IconOn";
 import { IconStar } from "../components/icons/IconStar";
 import { IconNotebook } from "../components/icons/IconNotebook";
-import { useRouter } from "next/router";
+import { IconGift } from "../components/icons/IconGift";
+import { IconOn } from "../components/icons/IconOn";
+
+Layout
 
 const vantagens = [
   {
@@ -66,6 +70,14 @@ export default function Home() {
           </div>
         </div>
       </div>
+    <div className="p-8">
+      <ul className="space-y-2 text-center title-bold text-white">
+        <li><Link href={routes.transacoes}>📄 Ver Transações</Link></li>
+        <li><Link href={routes.cadastro}>➕ Nova Transação</Link></li>
+      </ul>
+    </div>
     </section>
+
+
   );
-} 
+}

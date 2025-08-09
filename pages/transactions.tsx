@@ -10,8 +10,7 @@ export default function TransactionsPage() {
             showDetails={true}
             showAllTransactions={true}
             customTitle="Transações"
-            swapColumns={true}
-          />
+            swapColumns={true} transactions={[]}/>
         </div>
       </section>
     </Layout>

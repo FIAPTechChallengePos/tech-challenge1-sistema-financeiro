@@ -1,10 +1,8 @@
 module.exports = {
   darkMode: "class",
   content: [
-    "./src/**/*.{html,ts}",
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./pages/**/*.{html,ts}",
-    "./components/**/*.{html,ts}"
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}'
   ],
   safelist: [
     'text-white',
