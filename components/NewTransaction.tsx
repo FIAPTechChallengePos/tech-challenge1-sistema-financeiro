@@ -1,20 +1,17 @@
 import React, { useState } from "react";
-import { TransactionType, CreateTransactionData } from "../src/types/transaction";
 // import { Button } from "./Button";
 // import { Text } from "./Text";
 // import { Input } from "./Input";
 
-interface NewTransactionProps {
-  onAddTransaction?: (data: CreateTransactionData) => Promise<void>;
-}
+type TransactionType = "credito" | "debito" | "emprestimo";
 const transactionOptions = [
-  { display: "Receita", value: "credit" },
-  { display: "Despesa", value: "debit" },
-  { display: "Empréstimo", value: "loan" },
+  { display: "Depósito", value: "credito" },
+  { display: "Transferência/Compra", value: "debito" },
+  { display: "Empréstimo/Financiamento", value: "emprestimo" },
 ];
 
-export function NewTransaction({ onAddTransaction }: NewTransactionProps) {
-  const [type, setType] = useState<TransactionType>("credit");
+export function NewTransaction() {
+  const [type, setType] = useState<TransactionType>("credito");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string }>({
@@ -42,7 +39,7 @@ export function NewTransaction({ onAddTransaction }: NewTransactionProps) {
     setDescription(e.target.value);
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!type) {
       setSubmitStatus({ success: false, message: "Por favor, selecione o tipo de transação." });
@@ -56,35 +53,19 @@ export function NewTransaction({ onAddTransaction }: NewTransactionProps) {
       setSubmitStatus({ success: false, message: "Por favor, adicione uma descrição para a transação." });
       return;
     }
-
-    try {
-      const transactionData: CreateTransactionData = {
-        type,
-        amount: parseFloat(amount.replace(/\./g, "").replace(",", ".")),
-        description: description.trim(),
-      };
-
-      if (onAddTransaction) {
-        await onAddTransaction(transactionData);
-      }
-
-      setSubmitStatus({ success: true, message: "Transação criada com sucesso!" });
-      setType("credit");
-      setAmount("");
-      setDescription("");
-      setTimeout(() => setSubmitStatus({ success: false, message: "" }), 3000);
-    } catch (error) {
-      setSubmitStatus({ success: false, message: "Erro ao criar transação. Tente novamente." });
-      console.error('Erro ao criar transação:', error);
-    }
+    setSubmitStatus({ success: true, message: "Transação criada com sucesso!" });
+    setType("credito");
+    setAmount("");
+    setDescription("");
+    setTimeout(() => setSubmitStatus({ success: false, message: "" }), 3000);
   }
 
   return (
     <div className="rounded-xl shadow p-6 bg-white">
       <div className="pb-6">
         <div className="border-b-2">
-          {/* <Text variant="subtitle" as="h1" color="text-gray-900" className="mb-4 border-gray-200 block">Nova Transação</Text> */}
-          <span className="mb-4 border-gray-200 block text-lg font-bold text-gray-900">Nova Transação</span>
+          {/* <Text variant="subtitle" as="h1" color="text-gray-900" className="mb-4 border-sky-200 block">Nova Transação</Text> */}
+          <span className="mb-4 border-sky-200 block text-lg font-bold text-gray-900">Nova Transação</span>
         </div>
       </div>
       <form className="flex flex-col md:flex-row" onSubmit={handleSubmit}>
@@ -95,7 +76,7 @@ export function NewTransaction({ onAddTransaction }: NewTransactionProps) {
               <select
                 value={type}
                 onChange={handleTypeChange}
-                className="w-full p-4 rounded-md border border-cyan-blue-500 text-cyan-blue-500 font-lato font-medium"
+                className="w-full p-4 rounded-md border border-sky-500 text-sky-500 font-lato font-medium"
               >
                 {transactionOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -107,12 +88,12 @@ export function NewTransaction({ onAddTransaction }: NewTransactionProps) {
             {/* Valor */}
             <div className="mb-4">
               <div className="relative inline-block w-full">
-                <div className="w-full bg-gray-100 border border-cyan-blue-500 text-cyan-blue-500 font-lato font-medium rounded-md p-4 flex items-center max-w-[360px]">
-                  <span className="text-cyan-blue-500 mr-2">R$</span>
+                <div className="w-full bg-gray-100 border border-sky-500 text-sky-500 font-lato font-medium rounded-md p-4 flex items-center max-w-[360px]">
+                  <span className="text-sky-500 mr-2">R$</span>
                   <input
                     type="text"
                     placeholder="00,00"
-                    className="bg-transparent w-full outline-none text-cyan-blue-500 placeholder-cyan-blue-500 placeholder-opacity-70"
+                    className="bg-transparent w-full outline-none text-sky-500 placeholder-sky-500 placeholder-opacity-70"
                     value={amount}
                     onChange={handleAmountChange}
                     autoComplete="off"
@@ -126,7 +107,7 @@ export function NewTransaction({ onAddTransaction }: NewTransactionProps) {
               <input
                 type="text"
                 placeholder="Descrição da transação"
-                className="w-full max-w-[360px] bg-gray-100 border border-cyan-blue-500 text-cyan-blue-500 font-lato font-medium rounded-md p-4"
+                className="w-full max-w-[360px] bg-gray-100 border border-sky-500 text-sky-500 font-lato font-medium rounded-md p-4"
                 value={description}
                 onChange={handleDescriptionChange}
               />
@@ -144,11 +125,19 @@ export function NewTransaction({ onAddTransaction }: NewTransactionProps) {
             {/* Botão */}
             <button
               type="submit"
-              className="w-full max-w-full sm:max-w-[360px] bg-cyan-blue-500 text-white font-bold py-3 rounded-md mt-2"
+              className="w-full max-w-full sm:max-w-[360px] bg-sky-500 text-white font-bold py-3 rounded-md mt-2"
             >
               Concluir Transação
             </button>
           </div>
+        </div>
+        {/* Imagem ilustrativa */}
+        <div className="w-full md:w-1/2 pl-4 mt-[20px] flex justify-center">
+          <img
+            src="/banner2.svg"
+            alt="Ilustração de Transação"
+            className="max-w-full h-auto"
+          />
         </div>
       </form>
     </div>

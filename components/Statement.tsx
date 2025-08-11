@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from "react";
+import { Button } from "./Button";
+import { useRouter } from "next/router";
 // import { Text } from "./Text";
 // import { IconDollar, IconArrowDownLeft, IconArrowPencil, IconBin, IconArrowRight } from "./icons";
 // import { DeleteModal } from "./modal/DeleteModal";
@@ -50,7 +52,7 @@ export function Statement({
   // Funções utilitárias
   function isDeposit(transaction: Transaction) {
     // Adapte para sua lógica de tipos
-    return transaction.type === "credit";
+    return transaction.type === "credito";
   }
   function formatDate(date: Date | string) {
     const dateObj = date instanceof Date ? date : new Date(date);
@@ -91,11 +93,12 @@ export function Statement({
     setIsEditModalOpen(false);
     setTransactionToEdit(null);
   }
+  const router = useRouter();
 
   return (
     <>
       {showAlert && (
-        <div className="fixed top-0 left-0 right-0 bg-white text-cyan-blue-500 p-4 text-center z-50">
+        <div className="fixed top-0 left-0 right-0 bg-white text-sky-500 p-4 text-center z-50">
           {alertMessage}
         </div>
       )}
@@ -211,14 +214,7 @@ export function Statement({
         {/* Link para listar todas as transações */}
         {!showDetails && !showAllTransactions && (
           <div className="flex justify-end mt-4">
-            <a
-              href="/transactions"
-              className="inline-flex items-center gap-2 text-cyan-blue-500 hover:underline text-sm"
-            >
-              Listar
-              {/* <IconArrowRight /> */}
-              ➡️
-            </a>
+            <Button label="Listar" onClick={() => router.push("/transactions")} />
           </div>
         )}
       </div>

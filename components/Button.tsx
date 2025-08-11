@@ -3,8 +3,8 @@ import React from "react";
 type Theme =
   | "primary"
   | "secondary"
-  | "outline-cyan-blue"
-  | "ghost-cyan-blue"
+  | "outline-sky"
+  | "ghost-sky"
   | "ghost-white";
 type Size = "P" | "G" | "GG";
 
@@ -27,15 +27,15 @@ export function Button({
 }: ButtonProps) {
   const themeClasses = {
     primary:
-      "bg-cyan-blue-500 dark:bg-[#090979] hover:bg-cyan-blue-900 dark:hover:bg-blue-violet-900 text-white hover:text-gray-200",
+      "bg-sky-500 dark:bg-[#090979] hover:bg-sky-900 dark:hover:bg-blue-violet-900 text-white hover:text-sky-200",
     secondary:
       "bg-orange-500 dark:bg-yellow-500 hover:bg-orange-900 hover:dark:bg-yellow-900 dark:!text-brown-500 hover:!dark:text-brown-900 text-gray-50",
-    "outline-cyan-blue":
-      "bg-transparent dark:bg-transparent border dark:border border-cyan-blue-500 dark:border-[#090979] hover:bg-cyan-blue-500 dark:hover:bg-blue-violet-500 text-[#004d61] dark:text-[#090979] group-hover:text-white",
-    "ghost-cyan-blue":
-      "bg-transparent hover:text-cyan-blue-900 text-cyan-blue-500 hover:text-cyan-blue-900",
+    "outline-sky":
+      "bg-transparent dark:bg-transparent border dark:border border-sky-500 dark:border-[#090979] hover:bg-sky-500 dark:hover:bg-blue-violet-500 text-[#004d61] dark:text-[#090979] group-hover:text-white",
+    "ghost-sky":
+      "bg-transparent hover:text-sky-900 text-sky-500 hover:text-sky-900",
     "ghost-white":
-      "bg-transparent hover:text-orange-500 dark:hover:text-gray-200 !text-white hover:!text-gray-200 dark:!text-gray-200 hover:!dark:text-gray-250",
+      "bg-transparent hover:text-orange-500 dark:hover:text-sky-200 !text-white hover:!text-sky-200 dark:!text-sky-200 hover:!dark:text-gray-250",
   }[theme];
 
   const sizeClasses = {
@@ -49,7 +49,7 @@ export function Button({
       disabled={disabled}
       className={`group py-[14px] rounded-lg font-lato text-base font-semibold transition-colors duration-300 flex items-center justify-center ${themeClasses} ${sizeClasses} ${
         label ? "gap-2" : ""
-      } ${disabled ? "bg-gray-200 cursor-not-allowed !text-gray-500" : ""}`}
+      } ${disabled ? "bg-sky-200 cursor-not-allowed !text-gray-500" : ""}`}
       {...props}
     >
       {iconLeft}

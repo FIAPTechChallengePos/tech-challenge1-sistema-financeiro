@@ -39,7 +39,7 @@ export function Input({
     >
       <button
         type="button"
-        className={`w-full bg-gray-100 border border-cyan-blue-500 dark:border-blue-violet-500 text-cyan-blue-500 dark:text-blue-violet-500 font-lato font-medium rounded-md p-4 flex items-center justify-between ${
+        className={`w-full bg-gray-100 border border-sky-500 dark:border-blue-violet-500 text-sky-500 dark:text-blue-violet-500 font-lato font-medium rounded-md p-4 flex items-center justify-between ${
           size === "G" ? "gap-[66px]" : "gap-2"
         }`}
         onClick={() => setIsOpen((v) => !v)}
@@ -62,10 +62,10 @@ export function Input({
               <li
                 key={idx}
                 onClick={() => selectOption(option)}
-                className={`px-4 py-2 cursor-pointer transition-colors font-lato text-center text-cyan-blue-500 dark:text-blue-violet-500 ${
+                className={`px-4 py-2 cursor-pointer transition-colors font-lato text-center text-sky-500 dark:text-blue-violet-500 ${
                   getDisplayValue(option) === selectedOption
                     ? "bg-gray-100 font-semibold"
-                    : "hover:bg-cyan-blue-500 dark:hover:bg-blue-violet-500 hover:text-white dark:hover:text-white hover:font-bold"
+                    : "hover:bg-sky-500 dark:hover:bg-blue-violet-500 hover:text-white dark:hover:text-white hover:font-bold"
                 }`}
               >
                 {getDisplayValue(option)}

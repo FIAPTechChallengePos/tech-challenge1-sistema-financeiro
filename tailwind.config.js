@@ -7,7 +7,7 @@ module.exports = {
   safelist: [
     'text-white',
     'text-black-900',
-    'text-cyan-blue-500',
+    'text-sky-500',
     'text-orange-500',
     'text-green-600',
     'text-red-600',
@@ -42,7 +42,8 @@ module.exports = {
         'white-16': 'rgba(255, 255, 255, 0.16)',
       },
       backgroundImage: {
-        'primary-gradient': 'linear-gradient(to bottom, #003C50 0%, #007B8F 50%, #a9c4c9 100%);',
+        
+        'primary-gradient': 'linear-gradient(#004D61, #ffffff);',
         'primary-gradient-dark': 'linear-gradient(to bottom, #020024 0%, #090979 50%, #00D4FF 100%)',
         'secondary-gradient': 'linear-gradient(to bottom, #dee9ea, #ffffff)',
       },
@@ -50,22 +51,22 @@ module.exports = {
         lato: ['"Lato"', 'sans-serif'],
       },
       colors: {
-        "cyan-blue-100": "#80a6b0",
-        "cyan-blue-500": "#004d61",
-        "cyan-blue-900": "#003543",
+        "sky-100": "#80a6b0",
+        "sky-500": "#004d61",
+        "sky-900": "#004D61",
 
         "orange-100": "#ffa898",
         "orange-500": "#ff5031",
         "orange-900": "#cc4027",
 
         "gray-100": "#f8f8f8",
-        "gray-200": "#dee9ea",
+        "sky-200": "#dee9ea",
         "gray-250": "#ABAFBA",
         "black-600": "#767676",
         "black-700": "#444444",
         "black-900": "#131313",
 
-        "green-600": "#157f40",
+        "green-600": "#47a138",
         "red-600": "#ce3426",
 
         "yellow-500": "#E9C300",

@@ -5,7 +5,7 @@ import { Text } from "./Text";
 export function UnderConstruction() {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <IconUnderConstruction className="opacity-70 text-cyan-blue-500" />
+      <IconUnderConstruction className="opacity-70 text-sky-500" />
       <Text variant="title-bold" as="h1" color="text-regular">
         Em construção
       </Text>

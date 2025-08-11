@@ -2,7 +2,6 @@ import { Layout } from "../components/Layout";
 import { Statement } from "../components/Statement";
 import { NewTransaction } from "../components/NewTransaction";
 import { useTransactions } from "../src/hooks/useTransactions";
-import { Button } from "../components/Button";
 import { useRouter } from "next/router";
 import routes from "../lib/routes";
 import Link from "next/link";
@@ -13,9 +12,10 @@ export default function TransactionsPage() {
   const router = useRouter();
   return (
     <Layout>
-      <section className="w-full flex flex-col mt-0 sm:mt-[52px] xl:mt-0">
-        <div className="pt-6 pl-8 pb-2 font-bold text-(black-700)">
-           <Link href={routes.home}>HOME</Link>
+      <section className="w-full flex flex-col mt-0 xl:mt-0">
+         <div className="bg-white w-[100%] flex gap-10 pt-6 pl-8 pb-6 font-bold">
+           <Link className="text-black hover:text-green-500 hover:border-b-2 hover:border-green-500" href={routes.home}>Início</Link>
+           <Link className="text-black hover:text-green-500 hover:border-b-2 hover:border-green-500" href={routes.cadastro}>Dashboard</Link>
         </div>
         <div className="flex flex-col gap-6 p-6">
           {/* Resumo Financeiro */}
@@ -27,7 +27,7 @@ export default function TransactionsPage() {
               </p>
             </div>
             <div className="bg-white rounded-xl shadow p-4">
-              <h3 className="text-sm font-medium text-gray-500">Total de Receitas</h3>
+              <h3 className="text-sm font-medium text-gray-500">Extrato</h3>
               <p className="text-2xl font-bold text-green-600">
                 {stats.totalCredit.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               </p>

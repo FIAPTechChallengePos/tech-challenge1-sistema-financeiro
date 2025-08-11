@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { TransactionChart } from "./TransactionChart"; // Crie depois
 // import { useUser } from "../hooks/useUser"; // Crie depois
 // import { useTransaction } from "../hooks/useTransaction"; // Crie depois
 
@@ -15,14 +14,14 @@ export function Dashboard() {
   const [showBalance, setShowBalance] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage] = useState("");
-  // const [transactionData, setTransactionData] = useState([]); // Para o gráfico
+  const [transactionData, setTransactionData] = useState([]); // Para o gráfico
 
   useEffect(() => {
     // Simula busca de dados
     setIsLoading(true);
     setTimeout(() => {
       setUserName("Carina");
-      setBalance("R$ 1.234,56");
+      setBalance("R$ 5.109,38");
       setTotalEntries("R$ 2.000,00");
       setTotalExits("R$ 765,44");
       setIsLoading(false);
@@ -51,31 +50,31 @@ export function Dashboard() {
   return (
     <div className="p-4 sm:p-6 w-full max-w-full">
       {isLoading ? (
-        <div className="flex flex-col items-center justify-center p-8">
-          <p className="text-gray-600">Carregando informações...</p>
+        <div className="flex flex-col items-center justify-center p-12">
+          <p className="text-white">Carregando informações...</p>
         </div>
       ) : (
         <>
           {/* Desktop */}
-          <div className="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6 w-full">
+          <div className="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6 w-full pb-[100px]">
             <div>
-              <h1 className="text-xl sm:text-2xl text-gray-900 font-bold">
-                Olá, {userName}!
+              <h1 className="text-xl sm:text-2xl text-white font-bold">
+                Olá, {userName}! :)
               </h1>
-              <p className="text-gray-500 mt-2 sm:mt-3 text-xs sm:text-sm">
+              <p className="text-white mt-2 sm:mt-3 text-xs sm:text-sm">
                 {currentDate}
               </p>
             </div>
-            <div className="text-right w-full sm:w-auto mt-4 sm:mt-0">
-              <div className="flex items-center justify-end">
-                <p className="font-medium text-gray-700 mr-3 text-xl sm:text-2xl">
+            <div className="text-right w-full sm:w-auto mt-[100px] mr-[100px] sm:mt-20">
+              <div className="flex items-center justify-start border-b-2 border-orange-500">
+                <p className="font-medium text-white mr-3 text-xl sm:text-2xl mb-2">
                   Saldo
                 </p>
                 <button onClick={toggleBalance} className="focus:outline-none">
                   {/* Ícone de olho */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-gray-700"
+                    className="h-5 w-5 text-orange-500 mb-2"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -95,27 +94,26 @@ export function Dashboard() {
                   </svg>
                 </button>
               </div>
-              <p className="text-gray-500 mt-1 text-xs sm:text-sm">{accountType}</p>
-              <p className="text-gray-900 mt-2 sm:mt-3 text-xl sm:text-2xl font-bold">
+              <p className="text-white mt-2 text-xs sm:text-sm text-start">{accountType}</p>
+              <p className="text-white mt-2 sm:mt-3 text-xl sm:text-2xl">
                 {showBalance ? balance : "****"}
               </p>
             </div>
           </div>
           {/* Mobile */}
-          <div className="flex flex-col sm:hidden items-center text-center w-full">
+          <div className="flex flex-col sm:hidden items-center text-center w-full p-8">
             <div className="flex flex-col mb-4">
-              <h1 className="text-xl text-gray-900 font-bold">Olá, {userName}!</h1>
-              <p className="text-gray-500 text-xs">{currentDate}</p>
+              <h1 className="text-xl text-white font-bold">Olá, {userName}!</h1>
+              <p className="text-white text-s mt-2">{currentDate}</p>
             </div>
-            <div className="w-full border-t-2 border-gray-200 mb-4"></div>
             <div className="flex flex-col">
-              <div className="flex items-center justify-center">
-                <p className="font-medium text-gray-700 text-lg">Saldo</p>
+              <div className="flex items-center justify-start border-b-2 border-white mt-4 w-[150px]">
+                <p className="font-medium text-white mr-4 text-lg mb-2">Saldo</p>
                 <button onClick={toggleBalance} className="focus:outline-none ml-2">
                   {/* Ícone de olho */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-gray-700"
+                    className="h-5 w-5 text-left text-white mb-2"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -135,24 +133,12 @@ export function Dashboard() {
                   </svg>
                 </button>
               </div>
-              <p className="text-gray-500 mt-1 text-xs">{accountType}</p>
-              <p className="text-gray-900 text-lg font-bold">
+              <p className="text-white mt-2 text-left text-[16px]">{accountType}</p>
+              <p className="text-white text-left text-[24px] mt-1">
                 {showBalance ? balance : "****"}
               </p>
             </div>
           </div>
-          {/* Separador */}
-          <div className="px-6">
-            <div className="border-t-2 border-gray-200"></div>
-          </div>
-          {/* Título do gráfico */}
-          <div className="px-6 pt-6 pb-6">
-            <h2 className="text-gray-900 text-base font-bold text-center sm:text-left">
-              Transações de {currentMonthName}
-            </h2>
-          </div>
-          {/* Gráfico de transações */}
-          {/* <TransactionChart ... /> */}
           {/* Mensagem de erro */}
           {errorMessage && (
             <div className="p-4 bg-red-100 text-red-700 rounded-md mx-6 mb-6">

@@ -1,4 +1,4 @@
-export type TransactionType = "credit" | "debit" | "loan";
+export type TransactionType = "credito" | "debito" | "emprestimo";
 
 export interface Transaction {
   id: string;

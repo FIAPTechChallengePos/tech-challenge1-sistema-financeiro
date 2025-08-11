@@ -68,20 +68,20 @@ export function TransactionChart({
             {yAxisLabels.map((label, idx) => (
               <span
                 key={idx}
-                className="text-right text-xs text-gray-500 pr-1 w-10"
+                className="text-right text-xs text-white pr-1 w-10"
               >
                 {formatAxisLabel(label)}
               </span>
             ))}
           </div>
           {/* Grid */}
-          <div className="absolute inset-0 ml-10 border border-gray-200">
-            <div className="absolute w-full h-1/4 border-b border-gray-200"></div>
-            <div className="absolute w-full h-2/4 border-b border-gray-200"></div>
-            <div className="absolute w-full h-3/4 border-b border-gray-200"></div>
-            <div className="absolute h-full w-1/4 border-r border-gray-200"></div>
-            <div className="absolute h-full w-1/2 border-r border-gray-200"></div>
-            <div className="absolute h-full w-3/4 border-r border-gray-200"></div>
+          <div className="absolute inset-0 ml-10 border border-sky-200">
+            <div className="absolute w-full h-1/4 border-b border-sky-200"></div>
+            <div className="absolute w-full h-2/4 border-b border-sky-200"></div>
+            <div className="absolute w-full h-3/4 border-b border-sky-200"></div>
+            <div className="absolute h-full w-1/4 border-r border-sky-200"></div>
+            <div className="absolute h-full w-1/2 border-r border-sky-200"></div>
+            <div className="absolute h-full w-3/4 border-r border-sky-200"></div>
           </div>
           {/* Barras */}
           <div className="absolute inset-0 ml-10 flex justify-around items-end">
@@ -99,7 +99,7 @@ export function TransactionChart({
                         title={`Saídas: ${formatBalance(data.exits)}`}
                       ></div>
                       <div
-                        className="w-3 sm:w-5 md:w-7 bg-cyan-blue-500 dark:bg-blue-violet-500"
+                        className="w-3 sm:w-5 md:w-7 bg-sky-500 dark:bg-blue-violet-500"
                         style={{ height: calculateBarHeight(data.entries) }}
                         title={`Entradas: ${formatBalance(data.entries)}`}
                       ></div>
@@ -113,7 +113,7 @@ export function TransactionChart({
             {transactionData.map(
               (data, i) =>
                 data.day !== "" && (
-                  <span className="text-gray-600 text-xs" key={i}>
+                  <span className="text-white text-xs" key={i}>
                     {data.day}
                   </span>
                 )
@@ -124,7 +124,7 @@ export function TransactionChart({
       {/* Legenda mobile */}
       <div className="flex flex-col sm:hidden justify-center gap-2 items-center mt-8">
         <div className="flex items-center space-x-3">
-          <div className="w-4 h-4 rounded-full bg-cyan-blue-500 dark:bg-blue-violet-500"></div>
+          <div className="w-4 h-4 rounded-full bg-sky-500 dark:bg-blue-violet-500"></div>
           <div className="flex flex-col">
             <span className="text-xs">Entradas</span>
             <span className="text-sm font-bold">{totalEntries}</span>
@@ -141,7 +141,7 @@ export function TransactionChart({
       {/* Legenda desktop */}
       <div className="hidden sm:flex sm:flex-row lg:flex-col gap-4 sm:justify-center sm:items-center">
         <div className="flex items-center space-x-3">
-          <div className="w-4 h-4 rounded-full bg-cyan-blue-500 dark:bg-blue-violet-500"></div>
+          <div className="w-4 h-4 rounded-full bg-sky-500 dark:bg-blue-violet-500"></div>
           <div className="flex flex-col">
             <span className="text-xs">Entradas</span>
             <span className="text-sm font-bold">{totalEntries}</span>
