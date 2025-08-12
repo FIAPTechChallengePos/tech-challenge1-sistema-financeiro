@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { CreateTransactionData } from "../src/types/transaction";
 // import { Button } from "./Button";
 // import { Text } from "./Text";
 // import { Input } from "./Input";
+
+interface NewTransactionProps {
+  onAddTransaction?: (data: CreateTransactionData) => Promise<void>;
+}
 
 type TransactionType = "credito" | "debito" | "emprestimo";
 const transactionOptions = [
@@ -10,7 +15,7 @@ const transactionOptions = [
   { display: "Empréstimo/Financiamento", value: "emprestimo" },
 ];
 
-export function NewTransaction() {
+export function NewTransaction( {onAddTransaction}: NewTransactionProps) {
   const [type, setType] = useState<TransactionType>("credito");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -39,7 +44,7 @@ export function NewTransaction() {
     setDescription(e.target.value);
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!type) {
       setSubmitStatus({ success: false, message: "Por favor, selecione o tipo de transação." });
@@ -53,11 +58,26 @@ export function NewTransaction() {
       setSubmitStatus({ success: false, message: "Por favor, adicione uma descrição para a transação." });
       return;
     }
-    setSubmitStatus({ success: true, message: "Transação criada com sucesso!" });
-    setType("credito");
-    setAmount("");
-    setDescription("");
-    setTimeout(() => setSubmitStatus({ success: false, message: "" }), 3000);
+     try {
+      const transactionData: CreateTransactionData = {
+        type,
+        amount: parseFloat(amount.replace(/\./g, "").replace(",", ".")),
+        description: description.trim(),
+      };
+
+      if (onAddTransaction) {
+        await onAddTransaction(transactionData);
+      }
+
+      setSubmitStatus({ success: true, message: "Transação criada com sucesso!" });
+      setType("credito");
+      setAmount("");
+      setDescription("");
+      setTimeout(() => setSubmitStatus({ success: false, message: "" }), 3000);
+    } catch (error) {
+      setSubmitStatus({ success: false, message: "Erro ao criar transação. Tente novamente." });
+      console.error('Erro ao criar transação:', error);
+    }
   }
 
   return (
