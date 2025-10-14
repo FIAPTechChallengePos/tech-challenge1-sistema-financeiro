@@ -1,9 +1,10 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { Layout } from '../components/Layout';
-import { TransactionList } from '../components/TransactionList';
-import { TransactionForm } from '../components/TransactionForm';
 import { ThemeToggle } from '../components/ThemeToggle';
+import Link from 'next/link';
+import TransactionList from '../components/TransactionList';
+import TransactionForm from '../components/TransactionForm';
 
 interface TransactionsPageProps {
   transactions: any[];
@@ -63,13 +64,13 @@ export default function TransactionsPage({ transactions, categories, lastUpdated
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <div className="flex items-center space-x-4">
-                <a 
+                <Link 
                   href="/" 
                   className="text-sky-500 hover:text-sky-600 dark:text-blue-violet-400 dark:hover:text-blue-violet-300"
                   aria-label="Voltar para página inicial"
                 >
                   ← Voltar
-                </a>
+                </Link>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Transações
                 </h1>

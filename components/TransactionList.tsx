@@ -5,7 +5,7 @@ import { BaseLayoutProps } from "../src/types/components";
 import { Button } from "./Button";
 import { Text } from "./Text";
 
-interface Transaction {
+export interface Transaction {
   id: number;
   descricao: string;
   valor: number;
@@ -73,7 +73,7 @@ export default function TransactionList({
 
   // Função para filtrar e ordenar transações
   const getFilteredAndSortedTransactions = () => {
-    let filtered = transactions.filter((tx) => {
+    const filtered = transactions.filter((tx) => {
       const matchesSearch = tx.descricao.toLowerCase().includes(search.toLowerCase()) ||
                            tx.categoria?.toLowerCase().includes(search.toLowerCase());
       const matchesType = filterType === 'todos' || tx.tipo === filterType;

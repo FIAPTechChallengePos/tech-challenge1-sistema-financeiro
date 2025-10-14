@@ -4,6 +4,7 @@ import { Layout } from '../components/Layout';
 import { ThemeToggle, AccessibilitySettings } from '../components/ThemeToggle';
 import { Button } from '../components/Button';
 import { Text } from '../components/Text';
+import Link from 'next/link';
 
 interface ConfigurationsPageProps {
   lastUpdated: string;
@@ -52,13 +53,13 @@ export default function ConfigurationsPage({ lastUpdated }: ConfigurationsPagePr
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <div className="flex items-center space-x-4">
-                <a 
+                <Link 
                   href="/" 
                   className="text-sky-500 hover:text-sky-600 dark:text-blue-violet-400 dark:hover:text-blue-violet-300"
                   aria-label="Voltar para página inicial"
                 >
                   ← Voltar
-                </a>
+                </Link>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Configurações
                 </h1>
@@ -88,14 +89,14 @@ export default function ConfigurationsPage({ lastUpdated }: ConfigurationsPagePr
                 </Text>
                 <div className="space-y-4">
                   <div>
-                    <Text variant="text-regular" color="text-gray-700 dark:text-gray-300" as="label" className="block mb-2">
+                    <Text variant="text-regular" color="text-gray-700 dark:text-gray-300" as="span" className="block mb-2">
                       Modo de Exibição
                     </Text>
                     <ThemeToggle />
                   </div>
                   
                   <div>
-                    <Text variant="text-regular" color="text-gray-700 dark:text-gray-300" as="label" className="block mb-2">
+                    <Text variant="text-regular" color="text-gray-700 dark:text-gray-300" as="span" className="block mb-2">
                       Cores Personalizadas
                     </Text>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

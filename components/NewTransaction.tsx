@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CreateTransactionData } from "../src/types/transaction";
-// import { Button } from "./Button";
+import Image from "next/image";
+import { Button } from "./Button";
 // import { Text } from "./Text";
 // import { Input } from "./Input";
 
@@ -143,17 +144,17 @@ export function NewTransaction( {onAddTransaction}: NewTransactionProps) {
               </div>
             )}
             {/* Botão */}
-            <button
+            <Button
               type="submit"
               className="w-full max-w-full sm:max-w-[360px] bg-sky-500 text-white font-bold py-3 rounded-md mt-2"
             >
               Concluir Transação
-            </button>
+            </Button>
           </div>
         </div>
         {/* Imagem ilustrativa */}
         <div className="w-full md:w-1/2 pl-4 mt-[20px] flex justify-center">
-          <img
+          <Image
             src="/banner2.svg"
             alt="Ilustração de Transação"
             className="max-w-full h-auto"
