@@ -1,8 +1,35 @@
 import React, { useEffect, useState } from "react";
-// import { useUser } from "../hooks/useUser"; // Crie depois
-// import { useTransaction } from "../hooks/useTransaction"; // Crie depois
+import { BaseLayoutProps } from "../src/types/components";
 
-export function Dashboard() {
+interface DashboardData {
+  userName: string;
+  currentDate: string;
+  currentMonthName: string;
+  balance: string;
+  accountType: string;
+  totalEntries: string;
+  totalExits: string;
+  showBalance: boolean;
+  isLoading: boolean;
+  errorMessage: string;
+  transactionData: any[];
+}
+
+interface DashboardProps extends BaseLayoutProps {
+  onToggleBalance?: () => void;
+  onRefresh?: () => void;
+  showRefreshButton?: boolean;
+}
+export function Dashboard({
+  onToggleBalance,
+  onRefresh,
+  showRefreshButton = false,
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  role,
+  tabIndex,
+  ...props
+}: DashboardProps) {
   // Simulação de hooks de usuário e transações
   const [userName, setUserName] = useState("Usuário");
   const [currentDate, setCurrentDate] = useState("");
@@ -14,7 +41,7 @@ export function Dashboard() {
   const [showBalance, setShowBalance] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage] = useState("");
-  const [transactionData, setTransactionData] = useState([]); // Para o gráfico
+  const [transactionData, setTransactionData] = useState<any[]>([]); // Para o gráfico
 
   useEffect(() => {
     // Simula busca de dados
@@ -45,13 +72,35 @@ export function Dashboard() {
 
   function toggleBalance() {
     setShowBalance((prev) => !prev);
+    onToggleBalance?.();
   }
 
+  function handleRefresh() {
+    onRefresh?.();
+  }
+
+  const accessibilityClasses = `
+    focus:outline-none
+    reduced-motion:transition-none
+  `;
+
   return (
-    <div className="p-4 sm:p-6 w-full max-w-full">
+    <div 
+      className={`p-4 sm:p-6 w-full max-w-full ${accessibilityClasses}`}
+      aria-label={ariaLabel || "Painel de controle financeiro"}
+      aria-describedby={ariaDescribedBy}
+      role={role || "region"}
+      tabIndex={tabIndex}
+      {...props}
+    >
       {isLoading ? (
-        <div className="flex flex-col items-center justify-center p-12">
-          <p className="text-white">Carregando informações...</p>
+        <div 
+          className="flex flex-col items-center justify-center p-12"
+          role="status"
+          aria-live="polite"
+        >
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mb-4" aria-hidden="true"></div>
+          <p className="text-white" aria-label="Carregando informações do painel">Carregando informações...</p>
         </div>
       ) : (
         <>
@@ -70,7 +119,12 @@ export function Dashboard() {
                 <p className="font-medium text-white mr-3 text-xl sm:text-2xl mb-2">
                   Saldo
                 </p>
-                <button onClick={toggleBalance} className="focus:outline-none">
+                <button 
+                  onClick={toggleBalance} 
+                  className="focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded"
+                  aria-label={showBalance ? "Ocultar saldo" : "Mostrar saldo"}
+                  aria-pressed={!showBalance}
+                >
                   {/* Ícone de olho */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -78,6 +132,7 @@ export function Dashboard() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    aria-hidden="true"
                   >
                     <path
                       strokeLinecap="round"
@@ -95,7 +150,10 @@ export function Dashboard() {
                 </button>
               </div>
               <p className="text-white mt-2 text-xs sm:text-sm text-start">{accountType}</p>
-              <p className="text-white mt-2 sm:mt-3 text-xl sm:text-2xl">
+              <p 
+                className="text-white mt-2 sm:mt-3 text-xl sm:text-2xl"
+                aria-label={`Saldo atual: ${showBalance ? balance : 'oculto'}`}
+              >
                 {showBalance ? balance : "****"}
               </p>
             </div>
@@ -109,7 +167,12 @@ export function Dashboard() {
             <div className="flex flex-col">
               <div className="flex items-center justify-start border-b-2 border-white mt-4 w-[150px]">
                 <p className="font-medium text-white mr-4 text-lg mb-2">Saldo</p>
-                <button onClick={toggleBalance} className="focus:outline-none ml-2">
+                <button 
+                  onClick={toggleBalance} 
+                  className="focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 rounded ml-2"
+                  aria-label={showBalance ? "Ocultar saldo" : "Mostrar saldo"}
+                  aria-pressed={!showBalance}
+                >
                   {/* Ícone de olho */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -117,6 +180,7 @@ export function Dashboard() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    aria-hidden="true"
                   >
                     <path
                       strokeLinecap="round"
@@ -134,16 +198,46 @@ export function Dashboard() {
                 </button>
               </div>
               <p className="text-white mt-2 text-left text-[16px]">{accountType}</p>
-              <p className="text-white text-left text-[24px] mt-1">
+              <p 
+                className="text-white text-left text-[24px] mt-1"
+                aria-label={`Saldo atual: ${showBalance ? balance : 'oculto'}`}
+              >
                 {showBalance ? balance : "****"}
               </p>
             </div>
           </div>
           {/* Mensagem de erro */}
           {errorMessage && (
-            <div className="p-4 bg-red-100 text-red-700 rounded-md mx-6 mb-6">
+            <div 
+              className="p-4 bg-red-100 text-red-700 rounded-md mx-6 mb-6"
+              role="alert"
+              aria-live="assertive"
+            >
               {errorMessage}
             </div>
+          )}
+          {/* Botão de refresh */}
+          {showRefreshButton && (
+            <button
+              onClick={handleRefresh}
+              className="fixed bottom-4 right-4 bg-sky-500 hover:bg-sky-600 text-white p-3 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+              aria-label="Atualizar dados do painel"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+            </button>
           )}
         </>
       )}

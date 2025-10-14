@@ -2,7 +2,8 @@ module.exports = {
   darkMode: "class",
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}'
+    './components/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}'
   ],
   safelist: [
     'text-white',
@@ -18,6 +19,25 @@ module.exports = {
     'text-[14px]',
     'leading-[20px]',
     'leading-6',
+    // Classes de acessibilidade
+    'focus:ring-2',
+    'focus:ring-4',
+    'focus:ring-offset-2',
+    'focus:ring-offset-4',
+    'high-contrast:focus:ring-4',
+    'high-contrast:focus:ring-offset-4',
+    'reduced-motion:transition-none',
+    'reduced-motion:animate-none',
+    // Classes de contraste
+    'high-contrast',
+    'low-contrast',
+    'protanopia',
+    'deuteranopia',
+    'tritanopia',
+    'achromatopsia',
+    // Classes de tamanho de fonte
+    'font-small',
+    'font-large',
   ],
   theme: {
     container: {
@@ -80,6 +100,52 @@ module.exports = {
         "blue-violet-100": "#8589D6",
         "blue-violet-500": "#090979",
         "blue-violet-900": "#020024",
+
+        // Cores para alto contraste
+        "high-contrast": {
+          "bg": "#000000",
+          "text": "#FFFFFF",
+          "primary": "#00FFFF",
+          "secondary": "#FFFF00",
+          "accent": "#FF00FF",
+          "error": "#FF0000",
+          "success": "#00FF00",
+          "warning": "#FFA500",
+        },
+
+        // Cores para baixo contraste
+        "low-contrast": {
+          "bg": "#F5F5F5",
+          "text": "#666666",
+          "primary": "#999999",
+          "secondary": "#CCCCCC",
+          "accent": "#AAAAAA",
+          "error": "#CC6666",
+          "success": "#66CC66",
+          "warning": "#CCAA66",
+        },
+
+        // Cores para daltonismo
+        "protanopia": {
+          "primary": "#0066CC",
+          "secondary": "#CC6600",
+          "accent": "#6600CC",
+        },
+        "deuteranopia": {
+          "primary": "#0066CC", 
+          "secondary": "#CC6600",
+          "accent": "#6600CC",
+        },
+        "tritanopia": {
+          "primary": "#CC0066",
+          "secondary": "#00CC66", 
+          "accent": "#CC6600",
+        },
+        "achromatopsia": {
+          "primary": "#333333",
+          "secondary": "#666666",
+          "accent": "#999999",
+        },
       },
     },
   },
