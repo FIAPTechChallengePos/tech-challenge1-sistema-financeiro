@@ -1,4 +1,5 @@
 import React from "react";
+import { BaseButtonProps } from "../src/types/components";
 
 type Theme =
   | "primary"
@@ -8,7 +9,7 @@ type Theme =
   | "ghost-white";
 type Size = "P" | "G" | "GG";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends BaseButtonProps {
   theme?: Theme;
   size?: Size;
   label?: string;
@@ -23,6 +24,13 @@ export function Button({
   label,
   iconLeft,
   iconRight,
+  loading = false,
+  fullWidth = false,
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedBy,
+  'aria-expanded': ariaExpanded,
+  role,
+  tabIndex,
   ...props
 }: ButtonProps) {
   const themeClasses = {
@@ -39,22 +47,65 @@ export function Button({
   }[theme];
 
   const sizeClasses = {
-    P: "px-3",
-    G: "px-12",
-    GG: "px-28",
+    P: "px-3 py-2 text-sm",
+    G: "px-12 py-[14px] text-base",
+    GG: "px-28 py-4 text-lg",
   }[size];
+
+  const accessibilityClasses = `
+    focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2
+    dark:focus:ring-blue-violet-500
+    high-contrast:focus:ring-4 high-contrast:focus:ring-offset-4
+    reduced-motion:transition-none
+  `;
+
+  const widthClasses = fullWidth ? "w-full" : "";
 
   return (
     <button
-      disabled={disabled}
-      className={`group py-[14px] rounded-lg font-lato text-base font-semibold transition-colors duration-300 flex items-center justify-center ${themeClasses} ${sizeClasses} ${
-        label ? "gap-2" : ""
-      } ${disabled ? "bg-sky-200 cursor-not-allowed !text-gray-500" : ""}`}
+      disabled={disabled || loading}
+      className={`
+        group rounded-lg font-lato font-semibold transition-colors duration-300 
+        flex items-center justify-center gap-2
+        ${themeClasses} ${sizeClasses} ${widthClasses} ${accessibilityClasses}
+        ${disabled || loading ? "bg-sky-200 cursor-not-allowed !text-gray-500" : ""}
+        ${loading ? "cursor-wait" : ""}
+      `}
+      aria-label={ariaLabel || label}
+      aria-describedby={ariaDescribedBy}
+      aria-expanded={ariaExpanded}
+      aria-disabled={disabled || loading}
+      role={role}
+      tabIndex={tabIndex}
       {...props}
     >
-      {iconLeft}
+      {loading ? (
+        <svg
+          className="animate-spin h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          />
+        </svg>
+      ) : (
+        iconLeft
+      )}
       {label && <span>{label}</span>}
-      {iconRight}
+      {!loading && iconRight}
     </button>
   );
 } 
