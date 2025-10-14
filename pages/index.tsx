@@ -1,84 +1,259 @@
-import Link from "next/link";
-import { Layout } from "../components/Layout";
-import routes from "../lib/routes";
-import { Text } from "../components/Text";
-import { Button } from "../components/Button";
-import { useRouter } from "next/router";
-import { IconDispositivos } from "../components/icons/IconDispositivos";
-import { IconPresente } from "../components/icons/IconPresente";
-import { IconPontos } from "../components/icons/IconPontos";
-import { IconSaque } from "../components/icons/IconSaque";
+import { GetStaticProps } from 'next';
+import Head from 'next/head';
+import { Layout } from '../components/Layout';
+import { Dashboard } from '../components/Dashboard';
+import { TransactionList } from '../components/TransactionList';
+import { TransactionForm } from '../components/TransactionForm';
+import { ThemeToggle, AccessibilitySettings } from '../components/ThemeToggle';
 
-Layout
+interface HomePageProps {
+  transactions: any[];
+  categories: string[];
+  lastUpdated: string;
+}
 
-const vantagens = [
-  {
-    titulo: "Conta e cartão gratuitos",
-    descricao: "Conta digital, sem custo fixo e sem tarifa de manutenção.",
-    icon: IconPresente,
-  },
-  {
-    titulo: "Saques sem custo",
-    descricao: "Você pode sacar gratuitamente 4x por mês de qualquer Banco 24h.",
-    icon: IconSaque,
-  },
-  {
-    titulo: "Cartão internacional",
-    descricao: "Você pode acumular pontos com suas compras no crédito sem pagar mensalidade!",
-    icon: IconPontos,
-  },
-  {
-    titulo: "Proteção digital",
-    descricao: "Seus dispositivos móveis (computador e laptop) protegidos por uma mensalidade simbólica.",
-    icon: IconDispositivos,
-  },
-];
+export default function HomePage({ transactions, categories, lastUpdated }: HomePageProps) {
+  const handleTransactionSubmit = (data: any) => {
+    console.log('Nova transação:', data);
+    // Aqui você implementaria a lógica para salvar a transação
+  };
 
+  const handleTransactionClick = (transaction: any) => {
+    console.log('Transação clicada:', transaction);
+    // Aqui você implementaria a lógica para mostrar detalhes da transação
+  };
 
-export default function Home() {
-  const router = useRouter();
+  const handleLoadMore = () => {
+    console.log('Carregar mais transações');
+    // Aqui você implementaria a lógica para carregar mais transações
+  };
+
   return (
-    <section id="sobre" className="bg-primary-gradient dark:bg-primary-gradient-dark">
-      <div className="container flex flex-col gap-10 py-12">
-        {/* Primeira dobra */}
-        <div className="flex flex-col md:flex-col xl:flex-row justify-center items-center gap-10 xl:gap-12">
-          <div className="w-full max-w-full md:max-w-[700px] flex justify-center text-center">
-            <Text variant="title-bold" as="h1" color="text-neutral dark:text-sky-200">
-              Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!
-            </Text>
+    <>
+      <Head>
+        <title>Sistema Financeiro - Controle suas Finanças</title>
+        <meta name="description" content="Sistema completo para controle financeiro pessoal com interface acessível e moderna." />
+        <meta name="keywords" content="finanças, controle financeiro, transações, dinheiro, orçamento" />
+        <meta name="author" content="Sistema Financeiro" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sistema-financeiro.com/" />
+        <meta property="og:title" content="Sistema Financeiro - Controle suas Finanças" />
+        <meta property="og:description" content="Sistema completo para controle financeiro pessoal com interface acessível e moderna." />
+        <meta property="og:image" content="https://sistema-financeiro.com/og-image.jpg" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://sistema-financeiro.com/" />
+        <meta property="twitter:title" content="Sistema Financeiro - Controle suas Finanças" />
+        <meta property="twitter:description" content="Sistema completo para controle financeiro pessoal com interface acessível e moderna." />
+        <meta property="twitter:image" content="https://sistema-financeiro.com/og-image.jpg" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "Sistema Financeiro",
+              "description": "Sistema completo para controle financeiro pessoal",
+              "url": "https://sistema-financeiro.com",
+              "applicationCategory": "FinanceApplication",
+              "operatingSystem": "Web Browser",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "BRL"
+              },
+              "accessibilityFeature": [
+                "alternativeText",
+                "highContrastDisplay",
+                "largePrint",
+                "screenReader"
+              ],
+              "accessibilityHazard": "none",
+              "accessibilityAPI": "ARIA"
+            })
+          }}
+        />
+      </Head>
+
+      <Layout variant="default" spacing="medium">
+        {/* Cabeçalho */}
+        <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center py-4">
+              <div className="flex items-center">
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Sistema Financeiro
+                </h1>
+                <span className="ml-3 px-2 py-1 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full">
+                  Acessível
+                </span>
+              </div>
+              <div className="flex items-center space-x-4">
+                <ThemeToggle />
+                <AccessibilitySettings className="hidden md:block" />
+              </div>
+            </div>
           </div>
-          <img src="/banner.svg"/>
+        </header>
+
+        {/* Conteúdo principal */}
+        <main className="flex-1 bg-gray-50 dark:bg-gray-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Dashboard */}
+              <div className="lg:col-span-1">
+                <Dashboard 
+                  onToggleBalance={() => console.log('Toggle balance')}
+                  onRefresh={() => console.log('Refresh')}
+                  showRefreshButton={true}
+                  aria-label="Painel de controle financeiro"
+                />
         </div>
 
-        {/* Segunda dobra */}
-        <div id="servico" className="flex flex-col gap-2 text-left">
-          <Text variant="title-bold" as="h1" color="text-neutral text-center dark:text-sky-200">
-            Vantagens do nosso banco:
-          </Text>
-          <div className="text-green-600 flex flex-wrap lg:flex-row justify-center lg:justify-between gap-12 xl:py-[72px]">
-            {vantagens.map((vantagem, idx) => {
-              const Icon = vantagem.icon;
-              return (
-                <div key={idx} className="flex flex-col lg:col-span-2 items-center text-center gap-8 w-[200px]">
-                  <Icon className="text-green-600 dark:text-sky-200 w-24 h-24" />
-                  <Text variant="subtitle" as="h2" color="text-green-600 dark:text-sky-200">
-                    {vantagem.titulo}
-                  </Text>
-                  <Text variant="text-regular" as="p" color="text-neutral-600 dark:text-sky-200">
-                    {vantagem.descricao}
-                  </Text>
+              {/* Formulário de transação */}
+              <div className="lg:col-span-2">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+                  <TransactionForm
+                    onSubmit={handleTransactionSubmit}
+                    isLoading={false}
+                    submitLabel="Adicionar Transação"
+                    cancelLabel="Limpar Formulário"
+                    aria-label="Formulário de nova transação"
+                  />
                 </div>
-              );
-            })}
+
+                {/* Lista de transações */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                  <TransactionList
+                    transactions={transactions}
+                    onTransactionClick={handleTransactionClick}
+                    onLoadMore={handleLoadMore}
+                    showSearch={true}
+                    showPagination={true}
+                    aria-label="Lista de transações"
+                  />
           </div>
         </div>
       </div>
-    <div className="space-y-2 grid h-56 grid-cols content-center justify-center gap-4...">
-        <Button label="➕ Nova Transação" onClick={() => router.push("/panel")}/>
-        <Button label="📄 Ver Transações " onClick={() => router.push("/transactions")} />
     </div>
-    </section>
+        </main>
 
-
+        {/* Rodapé */}
+        <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                  Sistema Financeiro
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  Controle suas finanças de forma simples e eficiente com nossa plataforma acessível.
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-md font-semibold text-gray-900 dark:text-white mb-4">
+                  Recursos
+                </h4>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                  <li>• Controle de transações</li>
+                  <li>• Relatórios detalhados</li>
+                  <li>• Interface acessível</li>
+                  <li>• Modo escuro/claro</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="text-md font-semibold text-gray-900 dark:text-white mb-4">
+                  Acessibilidade
+                </h4>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                  <li>• Alto contraste</li>
+                  <li>• Navegação por teclado</li>
+                  <li>• Leitores de tela</li>
+                  <li>• Tamanhos de fonte ajustáveis</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex flex-col md:flex-row justify-between items-center">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  © 2024 Sistema Financeiro. Todos os direitos reservados.
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 md:mt-0">
+                  Última atualização: {lastUpdated}
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </Layout>
+    </>
   );
 }
+
+// Função para gerar dados estáticos
+export const getStaticProps: GetStaticProps = async () => {
+  // Simular busca de dados (em produção, isso viria de uma API ou banco de dados)
+  const mockTransactions = [
+    { id: 1, descricao: "Aluguel", valor: 1200, tipo: 'debito', categoria: 'Moradia', data: '2024-01-15' },
+    { id: 2, descricao: "Mercado", valor: 450.75, tipo: 'debito', categoria: 'Alimentação', data: '2024-01-14' },
+    { id: 3, descricao: "Salário", valor: 5000, tipo: 'credito', categoria: 'Salário', data: '2024-01-10' },
+    { id: 4, descricao: "Transporte", valor: 200, tipo: 'debito', categoria: 'Transporte', data: '2024-01-13' },
+    { id: 5, descricao: "Luz", valor: 150, tipo: 'debito', categoria: 'Moradia', data: '2024-01-12' },
+    { id: 6, descricao: "Internet", valor: 100, tipo: 'debito', categoria: 'Moradia', data: '2024-01-11' },
+    { id: 7, descricao: "Água", valor: 80, tipo: 'debito', categoria: 'Moradia', data: '2024-01-10' },
+    { id: 8, descricao: "Restaurante", valor: 250, tipo: 'debito', categoria: 'Alimentação', data: '2024-01-09' },
+    { id: 9, descricao: "Farmácia", valor: 90, tipo: 'debito', categoria: 'Saúde', data: '2024-01-08' },
+    { id: 10, descricao: "Cinema", valor: 60, tipo: 'debito', categoria: 'Lazer', data: '2024-01-07' },
+    { id: 11, descricao: "Show do BTS", valor: 2500, tipo: 'debito', categoria: 'Lazer', data: '2024-01-06' },
+    { id: 12, descricao: "Freelance", valor: 800, tipo: 'credito', categoria: 'Salário', data: '2024-01-05' },
+    { id: 13, descricao: "Gasolina", valor: 120, tipo: 'debito', categoria: 'Transporte', data: '2024-01-04' },
+    { id: 14, descricao: "Livros", valor: 180, tipo: 'debito', categoria: 'Educação', data: '2024-01-03' },
+    { id: 15, descricao: "Investimento", valor: 1000, tipo: 'debito', categoria: 'Investimento', data: '2024-01-02' },
+  ];
+
+  const categories = [
+    "Alimentação",
+    "Transporte", 
+    "Lazer",
+    "Moradia",
+    "Saúde",
+    "Educação",
+    "Salário",
+    "Investimento",
+    "Outros"
+  ];
+
+  const lastUpdated = new Date().toLocaleDateString('pt-BR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  return {
+    props: {
+      transactions: mockTransactions,
+      categories,
+      lastUpdated
+    },
+    // Revalidar a cada 1 hora (3600 segundos)
+    revalidate: 3600,
+  };
+};

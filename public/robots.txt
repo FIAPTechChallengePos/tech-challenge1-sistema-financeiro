@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Páginas principais
+Allow: /transactions
+Allow: /configurations
+Allow: /cards
+Allow: /transacoes/
+Allow: /panel
+
+# Bloquear páginas administrativas ou sensíveis
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://sistema-financeiro.com/sitemap.xml
+
+# Crawl-delay para evitar sobrecarga
+Crawl-delay: 1
