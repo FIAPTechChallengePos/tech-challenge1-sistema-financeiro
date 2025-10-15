@@ -86,7 +86,7 @@ export function Dashboard({
 
   return (
     <div 
-      className={`p-4 sm:p-6 w-full max-w-full ${accessibilityClasses}`}
+      className={` bg-sky-500 p-4 sm:p-6 w-full max-w-full ${accessibilityClasses}`}
       aria-label={ariaLabel || "Painel de controle financeiro"}
       aria-describedby={ariaDescribedBy}
       role={role || "region"}
@@ -105,7 +105,7 @@ export function Dashboard({
       ) : (
         <>
           {/* Desktop */}
-          <div className="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6 w-full pb-[100px]">
+          <div className="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6 w-full pb-[100px]" >
             <div>
               <h1 className="text-xl sm:text-2xl text-white font-bold">
                 Olá, {userName}! :)

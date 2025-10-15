@@ -48,7 +48,7 @@ const mockTransaction: Transaction[] = [
 
 const DEFAULT_PAGE_SIZE = 5;
 
-export default function TransactionList({
+export function TransactionList({
   transactions = mockTransaction,
   pageSize = DEFAULT_PAGE_SIZE,
   onLoadMore,

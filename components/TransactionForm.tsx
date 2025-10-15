@@ -54,7 +54,7 @@ const tiposTransacao = [
   { display: 'Débito', value: 'debito' }
 ];
 
-export default function TransactionForm({
+export function TransactionForm({
   onSubmit,
   onCancel,
   initialData,
