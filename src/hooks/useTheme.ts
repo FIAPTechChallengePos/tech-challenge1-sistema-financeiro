@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { ThemeConfig, AccessibilityConfig, ThemeContextType } from '../types/theme';
+import React from 'react';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -109,11 +110,12 @@ export function ThemeProvider({
     toggleContrast
   };
 
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+  return React.createElement(
+    ThemeContext.Provider,
+    { value },
+    children
   );
+
 }
 
 export function useTheme() {

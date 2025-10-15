@@ -18,7 +18,14 @@ export default function PanelPage() {
           <div className="flex w-full flex-col gap-6 p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6">
             <div className="flex flex-col 2md:flex-row gap-6">
               <div className="mx-auto bg-sky-900 rounded-xl shadow-md overflow-visible w-full xl:max-w-2/3">
-                <Dashboard />
+                <Dashboard  
+                  onToggleBalance={() => {}}
+                  onRefresh={() => console.log('Recarregar')}
+                  showRefreshButton={false}
+                  aria-label="Painel de controle financeiro"
+                >
+                <></>
+                </Dashboard>
               </div>
               <div className="order-3 2md:order-none 2md:w-1/3">
                 <div className="mx-auto overflow-hidden rounded-xl shadow-md">

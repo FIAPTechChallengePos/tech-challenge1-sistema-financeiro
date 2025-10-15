@@ -10,10 +10,10 @@ type Variant =
   | "text-small"
   | "text-small-bold";
 
-interface TextProps extends BaseTextProps {
+export interface TextProps extends Omit<BaseTextProps, "variant"> {
   variant?: Variant;
-  color?: string;
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "p" | "div";
+  color?: any;  
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "p" | "div" | "label";
 }
 
 const variantClasses: Record<Variant, string> = {
@@ -83,4 +83,5 @@ export function Text({
     >
       {children}
     </Tag>
-  ); 
+  );
+} 

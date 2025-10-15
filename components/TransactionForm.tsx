@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { BaseLayoutProps } from '../src/types/components';
 import { Button } from './Button';
 import { Text } from './Text';
 import { Input } from './Input';
@@ -54,7 +53,7 @@ const tiposTransacao = [
   { display: 'Débito', value: 'debito' }
 ];
 
-export default function TransactionForm({
+export function TransactionForm({
   onSubmit,
   onCancel,
   initialData,
@@ -204,7 +203,7 @@ export default function TransactionForm({
   };
 
   // Função para lidar com mudanças nos campos
-  const handleFieldChange = (field: keyof TransactionFormData, value: any) => {
+  const handleFieldChange = (field: keyof TransactionFormData, value: any) => {  
     setFormData(prev => ({ ...prev, [field]: value }));
     
     // Limpar erro do campo quando o usuário começar a digitar
@@ -276,7 +275,7 @@ export default function TransactionForm({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Função para formatar valor monetário
+  // Função para formatar valor
   const formatCurrency = (value: number | string): string => {
     if (value === '' || value === null || value === undefined) return '';
     const numValue = typeof value === 'string' ? parseFloat(value) : value;
@@ -308,10 +307,8 @@ export default function TransactionForm({
         </Text>
         <Input
           options={tiposTransacao}
-          size="G"
           placeholder="Selecione o tipo de transação"
           onSelectionChange={(value) => handleFieldChange('tipo', value)}
-          label="Tipo de Transação"
           required={true}
           error={erros.tipo}
           helperText="Escolha se é uma entrada (crédito) ou saída (débito) de dinheiro"
@@ -529,7 +526,7 @@ export default function TransactionForm({
         <Button
           type="submit"
           theme="primary"
-          size="G"
+          size="large"
           label={submitLabel}
           loading={isSubmitting || isLoading}
           disabled={isSubmitting || isLoading}
@@ -539,7 +536,7 @@ export default function TransactionForm({
         <Button
           type="button"
           theme="outline-sky"
-          size="G"
+          size="large"
           label={cancelLabel}
           onClick={handleCancel}
           disabled={isSubmitting || isLoading}

@@ -1,20 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BaseLayoutProps } from "../src/types/components";
 
-interface DashboardData {
-  userName: string;
-  currentDate: string;
-  currentMonthName: string;
-  balance: string;
-  accountType: string;
-  totalEntries: string;
-  totalExits: string;
-  showBalance: boolean;
-  isLoading: boolean;
-  errorMessage: string;
-  transactionData: any[];
-}
-
 interface DashboardProps extends BaseLayoutProps {
   onToggleBalance?: () => void;
   onRefresh?: () => void;
@@ -41,7 +27,6 @@ export function Dashboard({
   const [showBalance, setShowBalance] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage] = useState("");
-  const [transactionData, setTransactionData] = useState<any[]>([]); // Para o gráfico
 
   useEffect(() => {
     // Simula busca de dados
@@ -86,7 +71,7 @@ export function Dashboard({
 
   return (
     <div 
-      className={`p-4 sm:p-6 w-full max-w-full ${accessibilityClasses}`}
+      className={` bg-sky-500 p-4 sm:p-6 w-full max-w-full ${accessibilityClasses}`}
       aria-label={ariaLabel || "Painel de controle financeiro"}
       aria-describedby={ariaDescribedBy}
       role={role || "region"}
@@ -105,7 +90,7 @@ export function Dashboard({
       ) : (
         <>
           {/* Desktop */}
-          <div className="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6 w-full pb-[100px]">
+          <div className="hidden sm:flex flex-col sm:flex-row justify-between items-start gap-6 w-full pb-[100px]" >
             <div>
               <h1 className="text-xl sm:text-2xl text-white font-bold">
                 Olá, {userName}! :)

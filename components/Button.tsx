@@ -7,7 +7,7 @@ type Theme =
   | "outline-sky"
   | "ghost-sky"
   | "ghost-white";
-type Size = "P" | "G" | "GG";
+type Size = "small" | "medium" | "large";
 
 interface ButtonProps extends BaseButtonProps {
   theme?: Theme;
@@ -19,7 +19,7 @@ interface ButtonProps extends BaseButtonProps {
 
 export function Button({
   theme = "primary",
-  size = "G",
+  size = "medium",
   disabled = false,
   label,
   iconLeft,
@@ -47,9 +47,9 @@ export function Button({
   }[theme];
 
   const sizeClasses = {
-    P: "px-3 py-2 text-sm",
-    G: "px-12 py-[14px] text-base",
-    GG: "px-28 py-4 text-lg",
+    small: "px-1 py-1 text-sm",
+    medium: "px-12 py-[14px] text-base",
+    large: "px-28 py-4 text-lg",
   }[size];
 
   const accessibilityClasses = `

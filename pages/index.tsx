@@ -1,31 +1,28 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { Layout } from '../components/Layout';
-import { Dashboard } from '../components/Dashboard';
-import { TransactionList } from '../components/TransactionList';
-import { TransactionForm } from '../components/TransactionForm';
 import { ThemeToggle, AccessibilitySettings } from '../components/ThemeToggle';
+import { Dashboard } from '../components/Dashboard';
+import { TransactionForm } from '../components/TransactionForm';
+import { TransactionList } from '../components/TransactionList';
 
 interface HomePageProps {
-  transactions: any[];
+  transactions: any[];  
   categories: string[];
   lastUpdated: string;
 }
 
 export default function HomePage({ transactions, categories, lastUpdated }: HomePageProps) {
-  const handleTransactionSubmit = (data: any) => {
+  const handleTransactionSubmit = (data: any) => {  
     console.log('Nova transação:', data);
-    // Aqui você implementaria a lógica para salvar a transação
   };
 
-  const handleTransactionClick = (transaction: any) => {
+  const handleTransactionClick = (transaction: any) => {  
     console.log('Transação clicada:', transaction);
-    // Aqui você implementaria a lógica para mostrar detalhes da transação
   };
 
   const handleLoadMore = () => {
     console.log('Carregar mais transações');
-    // Aqui você implementaria a lógica para carregar mais transações
   };
 
   return (
@@ -97,9 +94,6 @@ export default function HomePage({ transactions, categories, lastUpdated }: Home
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Sistema Financeiro
                 </h1>
-                <span className="ml-3 px-2 py-1 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full">
-                  Acessível
-                </span>
               </div>
               <div className="flex items-center space-x-4">
                 <ThemeToggle />
@@ -115,12 +109,14 @@ export default function HomePage({ transactions, categories, lastUpdated }: Home
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Dashboard */}
               <div className="lg:col-span-1">
-                <Dashboard 
-                  onToggleBalance={() => console.log('Toggle balance')}
-                  onRefresh={() => console.log('Refresh')}
-                  showRefreshButton={true}
+                <Dashboard  
+                  onToggleBalance={() => {}}
+                  onRefresh={() => console.log('Recarregar')}
+                  showRefreshButton={false}
                   aria-label="Painel de controle financeiro"
-                />
+                >
+                <></>
+                </Dashboard>
         </div>
 
               {/* Formulário de transação */}

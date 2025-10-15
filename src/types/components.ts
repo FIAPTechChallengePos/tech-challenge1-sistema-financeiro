@@ -1,15 +1,12 @@
-import { ReactNode, ButtonHTMLAttributes, InputHTMLAttributes, HTMLAttributes } from 'react';
+import { ReactNode, ButtonHTMLAttributes, InputHTMLAttributes, HTMLAttributes, JSX, SVGProps } from 'react';
 
 // Tipos base para acessibilidade
 export interface AccessibilityProps {
   'aria-label'?: string;
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
-  'aria-expanded'?: boolean;
-  'aria-hidden'?: boolean;
   'aria-live'?: 'polite' | 'assertive' | 'off';
-  'aria-atomic'?: boolean;
-  role?: string;
+  // 'aria-atomic' is omitted to avoid conflict with HTMLAttributes
   tabIndex?: number;
 }
 
@@ -38,7 +35,7 @@ export interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement>, A
 // Tipos para componentes de texto
 export interface BaseTextProps extends HTMLAttributes<HTMLElement>, AccessibilityProps {
   children: ReactNode;
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body' | 'caption' | 'overline';
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body' | 'label' | 'caption' | 'overline';
   color?: 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'info';
   align?: 'left' | 'center' | 'right' | 'justify';
   weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
@@ -97,8 +94,8 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement>, Accessibilit
 
 // Tipos para componentes de tabela
 export interface TableProps extends HTMLAttributes<HTMLTableElement>, AccessibilityProps {
-  data: any[];
-  columns: TableColumn[];
+  data?: any[];  
+  columns?: TableColumn[];
   sortable?: boolean;
   selectable?: boolean;
   pagination?: boolean;
@@ -108,6 +105,6 @@ export interface TableColumn {
   key: string;
   title: string;
   sortable?: boolean;
-  render?: (value: any, row: any) => ReactNode;
+  render?: (value: any, row: any) => ReactNode;  
   width?: string | number;
 }

@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { BaseInputProps } from "../src/types/components";
 
-type OptionItem = { display: string; value: any } | string;
-type Size = "G" | "P";
+type OptionItem = { display: string; value: any } | string;  
+type Size = "large" | "small";
 
 interface InputProps extends Omit<BaseInputProps, 'onChange'> {
   options: OptionItem[];
-  size?: Size;
+  inputSize?: Size;
   placeholder?: string;
-  onSelectionChange?: (value: any) => void;
+  onSelectionChange?: (value: any) => void;  
   error?: string;
   helperText?: string;
   required?: boolean;
@@ -17,7 +17,7 @@ interface InputProps extends Omit<BaseInputProps, 'onChange'> {
 
 export function Input({
   options = [],
-  size = "G",
+  inputSize = "large",
   placeholder = "Selecione o tipo de transação",
   onSelectionChange,
   error,
@@ -117,7 +117,7 @@ export function Input({
 
   return (
     <div className={`relative inline-block w-full ${
-      size === "G" ? "max-w-[360px]" : "max-w-[290px]"
+      inputSize === "large" ? "max-w-[360px]" : "max-w-[290px]"
     }`}>
       {label && (
         <label 
@@ -141,7 +141,7 @@ export function Input({
           dark:focus:ring-blue-violet-500
           high-contrast:focus:ring-4 high-contrast:focus:ring-offset-4
           reduced-motion:transition-none
-          ${size === "G" ? "gap-[66px]" : "gap-2"}
+          ${inputSize === "large" ? "gap-[66px]" : "gap-2"}
           ${hasError 
             ? "border-red-500 dark:border-red-400" 
             : "border-sky-500 dark:border-blue-violet-500"
@@ -160,7 +160,7 @@ export function Input({
         aria-haspopup="listbox"
         role="combobox"
         tabIndex={tabIndex}
-        {...props}
+        {...Object.fromEntries(Object.entries(props).filter(([key]) => key !== "type"))}
       >
         <span className="truncate">
           {selectedOption || placeholder}
