@@ -12,7 +12,7 @@ type Variant =
 
 export interface TextProps extends Omit<BaseTextProps, "variant"> {
   variant?: Variant;
-  color?: any;
+  color?: any;  
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "p" | "div" | "label";
 }
 

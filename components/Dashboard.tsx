@@ -1,20 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BaseLayoutProps } from "../src/types/components";
 
-interface DashboardData {
-  userName: string;
-  currentDate: string;
-  currentMonthName: string;
-  balance: string;
-  accountType: string;
-  totalEntries: string;
-  totalExits: string;
-  showBalance: boolean;
-  isLoading: boolean;
-  errorMessage: string;
-  transactionData: any[];
-}
-
 interface DashboardProps extends BaseLayoutProps {
   onToggleBalance?: () => void;
   onRefresh?: () => void;
@@ -41,7 +27,6 @@ export function Dashboard({
   const [showBalance, setShowBalance] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage] = useState("");
-  const [transactionData, setTransactionData] = useState<any[]>([]); // Para o gráfico
 
   useEffect(() => {
     // Simula busca de dados

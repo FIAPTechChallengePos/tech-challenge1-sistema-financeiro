@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { BaseLayoutProps } from "../src/types/components";
 import { Button } from "./Button";
 import { Text } from "./Text";
 
@@ -82,7 +81,7 @@ export function TransactionList({
 
     // Ordenação
     filtered.sort((a, b) => {
-      let aValue: any, bValue: any;
+      let aValue: any, bValue: any;  
       
       switch (sortBy) {
         case 'data':
@@ -240,15 +239,16 @@ export function TransactionList({
         {/* Filtros e ordenação */}
         <div className="flex flex-wrap gap-4 items-center">
           {/* Filtro por tipo */}
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <Text variant="text-small" color="text-gray-600 dark:text-gray-400" as="span">
               Tipo:
             </Text>
             {(['todos', 'credito', 'debito'] as const).map((type) => (
               <Button
                 key={type}
+                label={type}
                 theme={filterType === type ? 'primary' : 'outline-sky'}
-                size="P"
+                size="small"
                 onClick={() => handleFilterType(type)}
                 aria-pressed={filterType === type}
                 aria-label={`Filtrar por ${type === 'todos' ? 'todos os tipos' : type === 'credito' ? 'créditos' : 'débitos'}`}
@@ -259,15 +259,16 @@ export function TransactionList({
           </div>
 
           {/* Ordenação */}
-          <div className="flex gap-2">
-            <Text variant="text-small" color="text-gray-600 dark:text-gray-400" as="span">
+          <div className="flex gap-2 items-center">
+            <Text variant="text-small" color="text-gray-600 dark:text-gray-400" as="p">
               Ordenar por:
             </Text>
             {(['data', 'valor', 'descricao'] as const).map((field) => (
               <Button
                 key={field}
+                label={field}
                 theme={sortBy === field ? 'primary' : 'outline-sky'}
-                size="P"
+                size="small"
                 onClick={() => handleSort(field)}
                 aria-pressed={sortBy === field}
                 aria-label={`Ordenar por ${field === 'data' ? 'data' : field === 'valor' ? 'valor' : 'descrição'}`}
@@ -365,7 +366,7 @@ export function TransactionList({
           {search && (
             <Button
               theme="ghost-sky"
-              size="P"
+              size="small"
               onClick={clearSearch}
               className="mt-2"
               aria-label="Limpar busca e mostrar todas as transações"
@@ -380,8 +381,9 @@ export function TransactionList({
       {showPagination && hasMore && (
         <div className="mt-6 text-center">
           <Button
+            label="Carregar mais transações"
             theme="primary"
-            size="G"
+            size="small"
             onClick={handleLoadMore}
             loading={isLoading}
             disabled={isLoading}
@@ -397,7 +399,7 @@ export function TransactionList({
         <div className="mt-4 text-center">
           <Button
             theme="ghost-sky"
-            size="P"
+            size="small"
             onClick={scrollToTop}
             aria-label="Voltar ao topo da lista"
           >

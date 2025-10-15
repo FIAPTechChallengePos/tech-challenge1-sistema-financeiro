@@ -156,6 +156,7 @@ export function NewTransaction( {onAddTransaction}: NewTransactionProps) {
         <div className="w-full md:w-1/2 pl-4 mt-[20px] flex justify-center">
           <Image
             src="/banner2.svg"
+            sizes="( max-width: 768px ) 100vw, 50vw"
             alt="Ilustração de Transação"
             className="max-w-full h-auto"
           />

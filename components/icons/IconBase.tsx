@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseIconProps } from '../../src/types/components';
 
 interface IconProps extends BaseIconProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   title?: string;
 }
 
