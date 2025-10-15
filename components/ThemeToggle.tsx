@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTheme } from './../src/hooks/useTheme';
 import { Button } from '../components/Button';
+import { useTheme } from '@/hooks/useTheme';
 
 interface ThemeToggleProps {
   className?: string;
@@ -14,7 +14,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       <div className="flex items-center gap-2">
         <Button
           theme="ghost-sky"
-          size="P"
+          size="small"
           onClick={toggleTheme}
           aria-label={`Alternar para tema ${theme.mode === 'light' ? 'escuro' : 'claro'}`}
         >
@@ -36,7 +36,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       <div className="flex items-center gap-2">
         <Button
           theme="ghost-sky"
-          size="P"
+          size="small"
           onClick={toggleContrast}
           aria-label={`Alternar contraste: ${theme.contrast}`}
         >
@@ -149,9 +149,10 @@ export function AccessibilitySettings({ className }: AccessibilitySettingsProps)
           <div className="flex gap-2">
             {(['small', 'medium', 'large'] as const).map((size) => (
               <Button
+                label={size}
                 key={size}
                 theme={accessibility.fontSize === size ? 'primary' : 'outline-sky'}
-                size="P"
+                size="small"
                 onClick={() => setFontSize(size)}
                 aria-pressed={accessibility.fontSize === size}
                 aria-label={`Definir tamanho de fonte ${size}`}

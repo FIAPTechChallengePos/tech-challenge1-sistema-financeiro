@@ -125,7 +125,7 @@ export default function ConfigurationsPage({ lastUpdated }: ConfigurationsPagePr
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Button
                     theme="primary"
-                    size="G"
+                    size="large"
                     label="Exportar Dados"
                     onClick={handleExportData}
                     iconLeft={
@@ -138,7 +138,7 @@ export default function ConfigurationsPage({ lastUpdated }: ConfigurationsPagePr
                   
                   <Button
                     theme="outline-sky"
-                    size="G"
+                    size="large"
                     label="Importar Dados"
                     onClick={handleImportData}
                     iconLeft={
@@ -151,7 +151,7 @@ export default function ConfigurationsPage({ lastUpdated }: ConfigurationsPagePr
                   
                   <Button
                     theme="secondary"
-                    size="G"
+                    size="large"
                     label="Backup Automático"
                     onClick={handleBackupData}
                     iconLeft={
@@ -164,7 +164,7 @@ export default function ConfigurationsPage({ lastUpdated }: ConfigurationsPagePr
                   
                   <Button
                     theme="ghost-sky"
-                    size="G"
+                    size="large"
                     label="Resetar Dados"
                     onClick={handleResetData}
                     iconLeft={

@@ -3,21 +3,22 @@ import Head from 'next/head';
 import { Layout } from '../components/Layout';
 import { ThemeToggle } from '../components/ThemeToggle';
 import Link from 'next/link';
-import TransactionList from '../components/TransactionList';
-import TransactionForm from '../components/TransactionForm';
+import { TransactionForm } from '../components/TransactionForm';
+import { TransactionList } from '../components/TransactionList';
+
 
 interface TransactionsPageProps {
-  transactions: any[];
+  transactions: any[];  
   categories: string[];
   lastUpdated: string;
 }
 
 export default function TransactionsPage({ transactions, categories, lastUpdated }: TransactionsPageProps) {
-  const handleTransactionSubmit = (data: any) => {
+  const handleTransactionSubmit = (data: any) => {  
     console.log('Nova transação:', data);
   };
 
-  const handleTransactionClick = (transaction: any) => {
+  const handleTransactionClick = (transaction: any) => {  
     console.log('Transação clicada:', transaction);
   };
 
